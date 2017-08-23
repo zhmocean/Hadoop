@@ -16,19 +16,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import OutputStream
-import InputStream
+import snappy
 
-import SequenceFile
-import ArrayFile
-import MapFile
-import SetFile
+from hadoop.io.InputStream import DataInputBuffer
+import StringIO
 
-from Writable import *
-from IntWritable import *
-from BytesWritable import *
-from NullWritable import *
-from Text import *
-import WritableUtils
+class SnappyCodec:
+    def compress(self, data):
+        return snappy.compress(data)
 
-import compress
+    def decompress(self, data):
+        print data
+        return snappy.uncompress(data)
+
+    def decompressInputStream(self, data):
+        print data
+        return DataInputBuffer(snappy(data))
